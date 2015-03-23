@@ -8,10 +8,6 @@ Esri Leaflet About doesn't rely on the minimal Esri Leaflet Core, but its still 
 
 ## Example
 
-Take a look at the [live demo](http://esri.github.com/esri-leaflet/examples/geocoding-control.html).
-
-![Example Image](https://raw.github.com/esri/esri-leaflet-geocoder/master/example.png)
-
 ```html
 <!DOCTYPE html>
 <html>
@@ -122,6 +118,8 @@ i don't think there are any.
 
 ## Licensing
 Copyright 2015 Esri
+
+question mark image found [here](http://icons8.com/)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

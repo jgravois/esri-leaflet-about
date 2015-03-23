@@ -1,3 +1,7 @@
+/*
+this should be an animated fade-in lightbox or whatever you'd call it kind of a thing
+*/
+
 EsriLeafletAbout = L.Control.extend({
   includes: L.Mixin.Events,
   options: {
@@ -30,24 +34,19 @@ EsriLeafletAbout = L.Control.extend({
     this._input = L.DomUtil.create('div', 'about-control-input leaflet-bar', this._wrapper);
     this._input.title = this.options.title;
 
-    //this._suggestions = L.DomUtil.create('div', 'about-control-suggestions leaflet-bar', this._wrapper);
-
-    L.DomEvent.addListener(this._input, 'focus', function(e){
-      this._input.placeholder = this.options.placeholder;
-      L.DomUtil.addClass(this._wrapper, 'about-control-expanded');
-    }, this);
+    this._suggestions = L.DomUtil.create('div', 'about-control-suggestions leaflet-bar', this._wrapper);
 
     L.DomEvent.addListener(this._wrapper, 'click', function(e){
 
       if (this._wrapper.classList.contains('about-control-expanded')){
         L.DomUtil.removeClass(this._wrapper, 'about-control-expanded');
-        this._input.innerHTML = '';
+        this._suggestions.innerHTML = '';
       }
       else {
-      L.DomUtil.addClass(this._wrapper, 'about-control-expanded');
-      this._input.innerHTML = this.options.message;
+        L.DomUtil.addClass(this._wrapper, 'about-control-expanded');
+        this._suggestions.style.display = 'block';
+        this._suggestions.innerHTML = this.options.message;
       }
-      //this._input.focus();
 
     }, this);
 
