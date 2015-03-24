@@ -1,16 +1,26 @@
+/*
+to do:
+attach toggle button position to the 'topleft' constructor option)
+add support for markdown
+dim map while about window is displayed
+
+note: sidebar was an existing plugin, need to find and give credit
+*/
+
 L.Control.About = L.Control.extend({
 
     includes: L.Mixin.Events,
 
     options: {
         closeButton: true,
-        position: 'left',
-        autoPan: true,
+        position: 'topleft',
         visible: false
     },
 
     initialize: function (placeholder, options) {
-        L.setOptions(this, options);
+        L.Util.setOptions(this, options);
+
+        //var button = this._buttonWrapper = L.DomUtil.create('div', 'leaflet-about-button', container);
 
         // Find content container
         var content = this._contentContainer = L.DomUtil.get(placeholder);
@@ -22,7 +32,7 @@ L.Control.About = L.Control.extend({
 
         // Create about container
         var container = this._container =
-            L.DomUtil.create('div', l + 'about ' + this.options.position);
+            L.DomUtil.create('div', l + 'about');
 
         // Style and attach content container
         L.DomUtil.addClass(content, l + 'control');
@@ -40,6 +50,14 @@ L.Control.About = L.Control.extend({
         var container = this._container;
         var content = this._contentContainer;
 
+        var button = this._buttonContainer = L.DomUtil.create('div', 'leaflet-about-button leaflet-bar leaflet-control');
+
+        button.options = {position:'topleft'};
+
+        L.DomEvent.addListener(button, 'click', function(e){
+          this.toggle();
+        }, this);
+
         // Attach event to close button
         if (this.options.closeButton) {
             var close = this._closeButton;
@@ -55,6 +73,10 @@ L.Control.About = L.Control.extend({
 
         // Attach about container to controls container
         var controlContainer = map._controlContainer;
+        var containerChild = controlContainer.firstChild;
+
+        // controlContainer.firstChild.insertAdjacentHTML('afterbegin', button.outerHTML);
+        containerChild.insertBefore(button, containerChild.firstChild);
         controlContainer.insertBefore(container, controlContainer.firstChild);
 
         this._map = map;
@@ -136,11 +158,6 @@ L.Control.About = L.Control.extend({
     hide: function (e) {
         if (this.isVisible()) {
             L.DomUtil.removeClass(this._container, 'visible');
-            if (this.options.autoPan) {
-                this._map.panBy([this.getOffset() / 2, 0], {
-                    duration: 0.5
-                });
-            }
             this.fire('hide');
         }
         if(e) {
@@ -167,14 +184,6 @@ L.Control.About = L.Control.extend({
     setContent: function (content) {
         this.getContainer().innerHTML = content;
         return this;
-    },
-
-    getOffset: function () {
-        if (this.options.position === 'right') {
-            return -this._container.offsetWidth;
-        } else {
-            return this._container.offsetWidth;
-        }
     },
 
     _handleTransitionEvent: function (e) {

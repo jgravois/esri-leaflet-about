@@ -1,43 +1,52 @@
+/*
+things to add:
+make transition vertical?
+make a good question mark icon
+cleanup/simplify messy CSS
+*/
+
 .leaflet-about {
     position: absolute;
     height: 100%;
-
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 50px;
-
+    padding: 20px;
+    min-width: 100%;
+    right: -1750px;
+    transition: right 0.5s, width 0.5s;
+    padding-left: 50px;
+    padding-right:50px;
     z-index: 2000;
 }
 
-.leaflet-about.left {
-    left: -500px;
-    transition: left 0.5s, width 0.5s;
-
-    padding-right: 0;
-}
-
-.leaflet-about.right {
-    right: -500px;
-    transition: right 0.5s, width 0.5s;
-
-    padding-left: 0;
-}
-
-.leaflet-about.left.visible {
-    left: 0;
-}
-
-.leaflet-about.right.visible {
+.leaflet-about.visible {
     right: 0;
 }
 
-.leaflet-left {
-    transition: left 0.5s;
-}
-
-.leaflet-right {
-    transition: right 0.5s;
+.leaflet-about-button {
+  position: absolute;
+  left: 0;
+  top: 60px;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-image: url("img/search.png");
+  background-size: 26px;
+  border: none;
+  padding: 0;
+  text-indent: 6px;
+  font-size: 13px;
+  line-height: normal;
+  height: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  background-position: right center;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  z-index: 8;
 }
 
 .leaflet-about > .leaflet-control {
@@ -66,96 +75,10 @@
     background-clip: padding-box;
 }
 
-/*
-@media(max-width:767px){
-    .leaflet-about {
-        width: 100%;
-        padding: 0;
-    }
-
-    .leaflet-about.left {
-        left: -100%;
-    }
-
-    .leaflet-about.right {
-        right: -100%;
-    }
-
-    .leaflet-about.left.visible {
-        left: 0;
-    }
-
-    .leaflet-about.right.visible {
-        right: 0;
-    }
-
-    .leaflet-about > .leaflet-control {
-        box-shadow: none;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-    }
-
-    .leaflet-about.left.visible ~ .leaflet-left {
-        left: 100%;
-    }
-
-    .leaflet-about.right.visible ~ .leaflet-right {
-        right: 100%;
-    }
-
-    .leaflet-touch .leaflet-about > .leaflet-control {
-        border: 0;
-    }
-}
-
-@media(min-width:768px) and (max-width:991px){
-    .leaflet-about {
-        width: 305px;
-    }
-
-    .leaflet-about.left.visible ~ .leaflet-left {
-        left: 305px;
-    }
-
-    .leaflet-about.right.visible ~ .leaflet-right {
-        right: 305px;
-    }
-}
-
-@media(min-width:992px) and (max-width:1199px){
-    .leaflet-about {
-        width: 390px;
-    }
-
-    .leaflet-about.left.visible ~ .leaflet-left {
-        left: 390px;
-    }
-
-    .leaflet-about.right.visible ~ .leaflet-right {
-        right: 390px;
-    }
-}
-
-
-@media(min-width:1200px){
-    .leaflet-about {
-        width: 660px;
-    }
-
-    .leaflet-about.left.visible ~ .leaflet-left {
-        left: 460px;
-    }
-
-    .leaflet-about.right.visible ~ .leaflet-right {
-        right: 460px;
-    }
-}
-*/
-
 .leaflet-about .close {
     position: absolute;
     right: 60px;
-    top: 60px;
+    top: 30px;
     width: 31px;
     height: 31px;
 
@@ -169,4 +92,32 @@
     cursor: pointer;
 
     z-index: 8;
+}
+
+
+@media(max-width:767px){
+    .leaflet-about {
+        width: 100%;
+        padding: 0;
+    }
+
+    .leaflet-about.visible {
+        right: 0;
+    }
+
+    .leaflet-about > .leaflet-control {
+        box-shadow: none;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .leaflet-touch .leaflet-about > .leaflet-control {
+        border: 0;
+    }
+
+    .leaflet-about > .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
 }

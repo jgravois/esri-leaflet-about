@@ -68,9 +68,10 @@
       var tiles = L.esri.basemapLayer('Gray').addTo(map);
 
       var aboot = L.control.about('about', {
-        closeButton: true,
-        position: 'right',
-        visible: true
+        //closeButton: true,
+        //position: 'right',
+        visible: false,
+        //autoPan: false
       });
       map.addControl(aboot);
     </script>
